@@ -85,6 +85,7 @@ spec:
         fsGroup: 1000
         seccompProfile:
           type: RuntimeDefault
+      enableServiceLinks: false
       containers:
         - name: seaweedfs
           image: ghcr.io/chrislusf/seaweedfs:4.48
