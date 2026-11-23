@@ -13,17 +13,10 @@ Mode d'emploi (à garder en tête du fichier) :
   quand vous aurez écrit la vôtre.
 -->
 
-**Binôme :** [À compléter : @pseudo-github-1 (Prénom Nom), @pseudo-github-2 (Prénom Nom)]
-**Repo :** [À compléter : https://github.com/VOTRE_USER/mlops-cours-2026]
-**Dataset :** [À compléter : german-credit (fil rouge) ou nom du dataset validé + lien de l'issue]
-**Extensions :** [À compléter à la S8 : @pseudo-1 → ext/<nom> · @pseudo-2 → ext/<nom>]
-
-## S0 — AAAA-MM-JJ — Exemple d'entrée (à supprimer)
-
-- **Pilote / copilote :** @alice / @bob
-- **Fait :** Lab 1 étapes 1 à 5 ; `dvc push` OK ; premier run MLflow dans l'expérience `scoring` (#3).
-- **Bloqué / appris :** `dvc push` refusé (identifiants absents de `.dvc/config.local`, corrigé).
-- **Prochaine étape :** Bob pilote le Lab 1 étapes 6-8 ; ouvrir l'ADR 0001 (métrique de promotion).
+**Binôme :** @Bessem105 (Bessem Jennen), travail en solo
+**Repo :** https://github.com/Bessem105/mlops-cours-2026
+**Dataset :** german-credit (fil rouge)
+**Extensions :** [À compléter à la S8 : @Bessem105 → ext/<nom>]
 
 <!-- Vos entrées commencent ici. Modèle :
 
@@ -35,3 +28,10 @@ Mode d'emploi (à garder en tête du fichier) :
 - **Prochaine étape :**
 
 -->
+
+## S2 — 2026-11-23 — Lab 1 : versionner un projet ML
+
+- **Pilote / copilote :** @Bessem105 / seul, sans binôme
+- **Fait :** Lab 1 complet, `make check-m1` à 18/18. Pipeline DVC `download -> prepare -> train -> evaluate`, 22 runs MLflow (3 types de modèles), registry `scoring-model` (versions 1 à 3, `@champion` et `@challenger`), feature store Feast (`request_features`, `scoring_v1`). PR `lab/m1` ouverte.
+- **Bloqué / appris :** le chargement du `@champion` depuis MLflow restait bloqué : l'URL S3 signée pointait vers `s3.storage:8333`, introuvable depuis WSL. Corrigé en ajoutant `127.0.0.1 s3.storage` dans `/etc/hosts` (le port-forward S3 reste nécessaire). Le port 5000 était aussi occupé par un conteneur `elk-logstash` d'un autre cours, arrêté. Le seuil de décision est coût-optimal (0.318 avec `class_weight: balanced`, coût 108).
+- **Prochaine étape :** fusionner la PR après relecture du binôme, puis Lab 2 (pipeline Kubeflow + Airflow).
